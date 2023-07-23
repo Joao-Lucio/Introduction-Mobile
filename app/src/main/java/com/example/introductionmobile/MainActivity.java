@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.view);
 
+        RocketModel rocketModel = new RocketModel("falcon1","02/10/2018",true,"satelite");
     }
 
 }
