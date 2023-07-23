@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         quantityText = findViewById(R.id.quantity);
         message = "Your total is $ ";
         totalMessage = findViewById(R.id.totalMessage);
+        totalMessage.setVisibility(View.GONE);
     }
 
     private void incrementQuantity(){
@@ -61,13 +63,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void orderButton(){
         order = findViewById(R.id.order);
-
+        EditText edName = findViewById(R.id.edName);
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int totalNumber = quantity * 15;
 
-                totalMessage.setText(message + totalNumber + "!" + "\n" + " Thanks for buying with us.");
+                totalMessage.setText(message + totalNumber + "!" + "\n" + " Thanks for buying with us, " + edName.getText().toString());
+                totalMessage.setVisibility(View.VISIBLE);
             }
         });
     }
