@@ -1,12 +1,10 @@
 package com.example.introductionmobile;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,22 +12,24 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     Spinner spinner;
+    RecyclerView recyclerView;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         recyclerView = findViewById(R.id.view);
         spinner = findViewById(R.id.spinner);
+        spinner();
+
 
         RocketModel rocketModel1 = new RocketModel("falcon1","02/10/2018",true,"satelite");
         RocketModel rocketModel2 = new RocketModel("falcon 9","03/10/2017",true,"Supplies");
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        spinner();
+
     }
 
     private void spinner(){
