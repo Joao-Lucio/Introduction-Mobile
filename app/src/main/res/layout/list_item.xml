@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rocketName"
+        android:text="Rocket: Falcon 1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/lauchDate"
+        android:text="Lauch Date: 02/03/2018"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lauchSuccess"
+        android:layout_below="@+id/rocketName"
+        android:layout_marginTop="20dp"
+        android:text="Lauch Success: Succeed"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/payload"
+        android:layout_alignBottom="@+id/lauchSuccess"
+        android:layout_alignParentRight="true"
+        android:text="Payload: Satelite"/>
+
+</RelativeLayout>
