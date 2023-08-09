@@ -1,20 +1,24 @@
 package com.example.introductionmobile;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 1;
-    TextView quantityText, totalMessage;
-    Button order, incrementButton, decrementButton;
-    String message;
+    Spinner spinner;
+    RecyclerView recyclerView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -22,56 +26,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        incrementQuantity();
-        decrementQuantity();
-        orderButton();
+        recyclerView = findViewById(R.id.view);
+        spinner = findViewById(R.id.spinner);
+        spinner();
 
-        quantityText = findViewById(R.id.quantity);
-        message = "Your total is $ ";
-        totalMessage = findViewById(R.id.totalMessage);
-        totalMessage.setVisibility(View.GONE);
+
+        RocketModel rocketModel1 = new RocketModel("falcon1","02/10/2018",true,"satelite");
+        RocketModel rocketModel2 = new RocketModel("falcon 9","03/10/2017",true,"Supplies");
+        RocketModel rocketModel3 = new RocketModel("dragon","10/09/2016",true,"satelite");
+
+        ArrayList<RocketModel> rocketModels = new ArrayList<>();
+        rocketModels.add(rocketModel1);
+        rocketModels.add(rocketModel2);
+        rocketModels.add(rocketModel3);
+
+        RecyclerAdapter adapter = new RecyclerAdapter(rocketModels);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
     }
 
-    private void incrementQuantity(){
-        incrementButton = findViewById(R.id.increment);
+    private void spinner(){
+        String[] stringList = {"Item 1", "Item 2", "Item 3", "Item 4"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, stringList);
+        adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter1);
 
-        incrementButton.setOnClickListener(new View.OnClickListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if(quantity < 10){
-                quantity++;
-                }
-                quantityText.setText(String.valueOf(quantity));
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+
+                Toast.makeText(MainActivity.this, "You selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
 
-    private void decrementQuantity(){
-        decrementButton = findViewById(R.id.decrement);
-
-        decrementButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(quantity > 1){
-                quantity--;
-                }
-
-                quantityText.setText(String.valueOf(quantity));
-            }
-        });
-    }
-    private void orderButton(){
-        order = findViewById(R.id.order);
-        EditText edName = findViewById(R.id.edName);
-        order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int totalNumber = quantity * 15;
-
-                totalMessage.setText(message + totalNumber + "!" + "\n" + " Thanks for buying with us, " + edName.getText().toString());
-                totalMessage.setVisibility(View.VISIBLE);
-            }
-        });
-    }
 }
